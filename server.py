@@ -1,16 +1,28 @@
 from flask import Flask, jsonify, request
 import mimetypes
-# モジュール読み込み
 import pymysql.cursors
 import random
 
 app = Flask(__name__)
 
-# 日本語を使えるように
 app.config['JSON_AS_ASCII'] = False
 
 @app.route("/", methods=["GET", "POST"])
 def post():
+    """概要
+
+    POSTリクエスト
+
+    Args:
+        request.json['image_path'] (str): 画像パス
+
+    Returns:
+
+    Examples:
+
+    Note:
+
+    """
 
     ng_res = {
     "success": False,
@@ -36,22 +48,38 @@ def post():
             }
 
             return jsonify(ok_res)
-        else:
-            return jsonify(ng_res)
-    else:
-        return jsonify(ng_res)
-
+    return jsonify(ng_res)
 
 def img_path_what(image_path):
-    flg = False
+    """概要
+
+    画像拡張子確認
+
+    Args:
+        image_path (str): postで受け取った画像パス
+
+    Returns:
+        bool: image_pathが画像の拡張子か判定
+
+    Examples:
+
+        >>> img_path_what("/image/d03f1d36ca69348c51aa/c413eac329e1c0d03/test.jpg")
+        True
+
+        >>> img_path_what("/image/d03f1d36ca69348c51aa/c413eac329e1c0d03/test.j")
+        False
+
+    Note:
+
+    """
+
     try:
         imgtype = mimetypes.guess_type(image_path)[0] 
         if "image" in imgtype:
-            flg = True
+            return True
     except:
-        flg = False
-    finally:
-        return flg
+        return False
+        
 
 if __name__ == '__main__':
     app.run()

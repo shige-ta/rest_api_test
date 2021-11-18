@@ -24,33 +24,33 @@ def post():
 
     """
 
-    ng_res = {
-    "success": False,
-    "message": "Error:E50012",
-    "estimated_data": {}
+    ng_res: dict = {
+        "success": False,
+        "message": "Error:E50012",
+        "estimated_data": {}
     }
 
     if request.method == "POST":
-        image_path = request.json['image_path']
+        image_path: str = request.json['image_path']
         if img_path_what(image_path):
             print(image_path)
 
-            _class = random.randint(1,10)
-            confidence = random.uniform(0,1)
+            _class: int = random.randint(1,10)
+            confidence: float = random.uniform(0,1)
 
-            ok_res = {
+            ok_res: dict = {
                 "success": True,
                 "message": "success",
                 "estimated_data": {
-                "class": _class,
-                "confidence": confidence
+                    "class": _class,
+                    "confidence": confidence
                 }
             }
 
             return jsonify(ok_res)
     return jsonify(ng_res)
 
-def img_path_what(image_path):
+def img_path_what(image_path: str):
     """概要
 
     画像拡張子確認
@@ -74,9 +74,11 @@ def img_path_what(image_path):
     """
 
     try:
-        imgtype = mimetypes.guess_type(image_path)[0] 
+        imgtype:str = str(mimetypes.guess_type(image_path)[0])
         if "image" in imgtype:
             return True
+        else:
+            pass
     except:
         return False
         

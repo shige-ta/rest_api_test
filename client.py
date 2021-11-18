@@ -32,14 +32,14 @@ def db_insert(data):
                                 password=config['DEFAULT']['password'],
                                 db=config['DEFAULT']['db'],
                                 charset=config['DEFAULT']['charset'],
-                                cursorclass=pymysql.cursors.DictCursor)
-
+                                cursorclass=pymysql.cursors.DictCursor,
+    )
 
     with connection.cursor() as cursor:
-        c = ["%s" for i in range(len(data))]
-        keys =  data.keys()
-        values = [data[i] for i in keys]
-        sql = "INSERT INTO ai_analysis_log ("+ ",".join(keys) + ") VALUES (" + ",".join(c) + ")"
+        c: list = ["%s" for i in range(len(data))]
+        keys: list =  data.keys()
+        values: list = [data[i] for i in keys]
+        sql: str = "INSERT INTO ai_analysis_log ("+ ",".join(keys) + ") VALUES (" + ",".join(c) + ")"
         r = cursor.execute(sql, (values))
         print(r) # -> 1
         connection.commit()
@@ -49,16 +49,16 @@ def db_insert(data):
 
 if __name__ == '__main__':
     # リクエスト
-    url = "http://localhost:5000/"
-    image_path = "/image/d03f1d36ca69348c51aa/c413eac329e1c0d03/test.jpg"
-    payload = json.dumps({"image_path": image_path})
-    request_timestamp = datetime.datetime.now()
+    url: str = "http://localhost:5000/"
+    image_path: str = "/image/d03f1d36ca69348c51aa/c413eac329e1c0d03/test.jpg"
+    payload: str = json.dumps({"image_path": image_path})
+    request_timestamp: datetime.datetime = datetime.datetime.now()
     res = requests.post(url, data=payload, headers={'Content-Type': 'application/json'})
     
     # レスポンスをdbに保存
-    response_timestamp = datetime.datetime.now()
-    data = json.loads(res.text)
-    data_list = {}
+    response_timestamp: datetime.datetime = datetime.datetime.now()
+    data:dict = json.loads(res.text)
+    data_list: dict = {}
     try:
         data_list['confidence'] = data['estimated_data']['confidence']
         data_list['class'] = data['estimated_data']['class']

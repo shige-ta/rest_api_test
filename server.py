@@ -21,7 +21,6 @@ def post():
     if request.method == "POST":
         image_path = request.json['image_path']
         if img_path_what(image_path):
-            db_insert(image_path)
             print(image_path)
 
             _class = random.randint(1,10)
@@ -53,27 +52,6 @@ def img_path_what(image_path):
         flg = False
     finally:
         return flg
-
-def db_insert(image_path):
-    # MySQLに接続する
-    connection = pymysql.connect(host='localhost',
-                                user='',
-                                password='',
-                                db='',
-                                charset='utf8',
-                                # cursorclassを指定することで
-                                # Select結果をtupleではなくdictionaryで受け取れる
-                                cursorclass=pymysql.cursors.DictCursor)
-
-    with connection.cursor() as cursor:
-        sql = "INSERT INTO ai_analysis_log (image_path) VALUES (%s)"
-        r = cursor.execute(sql, (image_path))
-        print(r) # -> 1
-        # autocommitではないので、明示的にコミットする
-        connection.commit()
-
-    # MySQLから切断する
-    connection.close()
 
 if __name__ == '__main__':
     app.run()

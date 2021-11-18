@@ -6,9 +6,9 @@ import datetime
 def db_insert(data):
     # MySQLに接続する
     connection = pymysql.connect(host='localhost',
-                                user='shigeta',
-                                password='abcd',
-                                db='deepwork1',
+                                user='',
+                                password='',
+                                db='',
                                 charset='utf8',
                                 # cursorclassを指定することで
                                 # Select結果をtupleではなくdictionaryで受け取れる

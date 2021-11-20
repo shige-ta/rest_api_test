@@ -26,5 +26,3 @@ python3 client.py
 ```bash
 uvicorn server_fastapi_ver:app
 ```
-
-![server_fastapi_ver](https://github.com/shige-ta/rest_api_test/blob/main/server_fastapi_ver.png)

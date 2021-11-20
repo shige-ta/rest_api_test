@@ -27,5 +27,4 @@ python3 client.py
 python3 server_fastapi_ver.py
 ```
 
-![server_fastapi_ver]
-(https://github.com/shige-ta/rest_api_test/blob/main/server_fastapi_ver.png)
+![server_fastapi_ver](https://github.com/shige-ta/rest_api_test/blob/main/server_fastapi_ver.png)

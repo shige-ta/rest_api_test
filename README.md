@@ -24,7 +24,7 @@ python3 client.py
 
 本プログラム起動(fastapi version)
 ```bash
-python3 server_fastapi_ver.py
+uvicorn server_fastapi_ver:app
 ```
 
 ![server_fastapi_ver](https://github.com/shige-ta/rest_api_test/blob/main/server_fastapi_ver.png)
